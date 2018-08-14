@@ -1,0 +1,25 @@
+html {
+    background: transparent;
+}
+
+body {
+    background: black;
+}
+
+.container {
+    padding: 100px;
+}
+
+a {
+    color: inherit;
+}
+
+a:hover {
+    color: #85bb65;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#stocks {
+    padding: 25px;
+}
