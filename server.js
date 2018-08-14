@@ -16,6 +16,9 @@ app.use(session({
 
 // Require body-parser (to receive post data from clients)
 var bodyParser = require('body-parser');
+
+app.use(express.static(__dirname + "/client/public/dist/public"));
+
 // Integrate body-parser with our App
 app.use(bodyParser.json());
 
