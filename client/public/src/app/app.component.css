@@ -1,13 +1,15 @@
 html {
-    background: transparent;
+    height: 100%;
 }
 
 body {
-    background: black;
+    min-height: 100%;
+    background-color: black;
 }
 
 .container {
     padding: 100px;
+    background-color: black;
 }
 
 a {
