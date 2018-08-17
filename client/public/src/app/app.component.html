@@ -1,37 +1,9 @@
-<div id="full" class="h-100">
-  <nav class="navbar navbar-expand-lg">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="#" id="signin">Login/Register</a>
-      </li>
-    </ul>
-  </nav>
+<nav class="navbar navbar-expand-lg">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="#" id="signin">Login/Register</a>
+    </li>
+  </ul>
+</nav>
 
-  <div class="container text-center text-white">
-    <h1>Investment Tracker</h1>
-    <h2>Wanna get into investing but afraid to risk your own money?</h2>
-    <h2>Try this tool out. Experiment, simulate, learn.</h2>
-    <div id="stocks">
-      <div class="row">
-        <p class="col-md">DOW J</p>
-        <p class="col-md">{{stocks["DJIA"]["price"]}}</p>
-        <p *ngIf="stocks['DJIA']['change'] >= 0" class="col-md text-success">+{{stocks["DJIA"]["change"]}} (+{{stocks["DJIA"]["percent"]}}%)</p>
-        <p *ngIf="0 > stocks['DJIA']['change']" class="col-md text-danger">-{{stocks["DJIA"]["change"]}} (-{{stocks["DJIA"]["percent"]}}%)</p>
-      </div>
-
-      <div class="row">
-        <p class="col-md">NASDAQ</p>
-        <p class="col-md">{{stocks[".IXIC"]["price"]}}</p>
-        <p *ngIf="stocks['.IXIC']['change'] >= 0" class="col-md text-success">+{{stocks[".IXIC"]["change"]}} (+{{stocks[".IXIC"]["percent"]}}%)</p>
-        <p *ngIf="0 > stocks['.IXIC']['change']" class="col-md text-danger">{{stocks[".IXIC"]["change"]}} ({{stocks[".IXIC"]["percent"]}}%)</p>
-      </div>
-
-      <div class="row">
-        <p class="col-md">S&P 500</p>
-        <p class="col-md">{{stocks[".INX"]["price"]}}</p>
-        <p *ngIf="stocks['.INX']['change'] >= 0" class="col-md text-success">+{{stocks[".INX"]["change"]}} (+{{stocks[".INX"]["percent"]}}%)</p>
-        <p *ngIf="0 > stocks['.INX']['change']" class="col-md text-danger">{{stocks[".INX"]["change"]}} ({{stocks[".INX"]["percent"]}}%)</p>
-      </div>
-    </div>
-  </div>
-</div>
+<router-outlet></router-outlet> 
