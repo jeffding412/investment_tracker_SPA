@@ -31,6 +31,10 @@ require('./server/config/mongoose.js')();
 // Routes
 require('./server/config/routes.js')(app)
 
+app.all("*", (req,res,next) => {
+  res.sendFile(path.resolve("./client/public/dist/public/index.html"))
+});
+
 // Setting our Server to Listen on Port: 8000
 app.listen(8000, function() {
     console.log("listening on port 8000");

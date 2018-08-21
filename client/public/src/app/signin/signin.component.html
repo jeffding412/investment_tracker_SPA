@@ -1,0 +1,35 @@
+<div class="container text-white">
+  <div class="row">
+    <div class="col-lg">
+      <h1>Login</h1>
+      <form (submit)="login()">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" class="form-control" name="user.username" [(ngModel)]="user.username">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" name="user.password" [(ngModel)]="user.password">
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+
+    <div class="col-lg">
+      <h1>Register</h1>
+      <form (submit)="register()">
+        <div class="form-group">
+          <label>Username</label>
+          <p class="text-danger" *ngIf="errors.username">{{errors.username}}</p>
+          <input type="text" class="form-control" name="newUser.username" [(ngModel)]="newUser.username">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <p class="text-danger" *ngIf="errors.password">{{errors.password}}</p>
+          <input type="password" class="form-control" name="newUser.password" [(ngModel)]="newUser.password">
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
