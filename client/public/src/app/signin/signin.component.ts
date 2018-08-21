@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from './../http.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -21,7 +22,11 @@ export class SigninComponent implements OnInit {
 
   errors = {}
 
-  constructor(private _httpService: HttpService){}
+  constructor(
+    private _httpService: HttpService,
+    private _route: ActivatedRoute,
+    private _router: Router
+  ){}
 
   ngOnInit() {
   }
@@ -36,7 +41,7 @@ export class SigninComponent implements OnInit {
       else {
         let observable = this._httpService.createUser(this.newUser);
         observable.subscribe(data => {
-          console.log(data);
+          this.continue(data["_id"]);
         });
       }
     });
@@ -82,11 +87,15 @@ export class SigninComponent implements OnInit {
             this.errors["status"] = "true";
           }
           else {
-            console.log(data);
+            this.continue(data["_id"]);
           }
         })
       }
     });
+  }
+
+  continue(id) {
+    this._router.navigate(['/portfolio', id]);
   }
 
   register() {

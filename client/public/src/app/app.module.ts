@@ -7,12 +7,14 @@ import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './main/main.component';
 import { SigninComponent } from './signin/signin.component';
+import { PortfolioComponent } from './portfolio/portfolio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    SigninComponent
+    SigninComponent,
+    PortfolioComponent
   ],
   imports: [
     BrowserModule,

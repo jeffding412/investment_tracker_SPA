@@ -11,3 +11,13 @@ body {
     padding: 100px;
     background-color: black;
 }
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: #85bb65;
+    text-decoration: none;
+    cursor: pointer;
+}
