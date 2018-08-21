@@ -70,12 +70,21 @@ export class SigninComponent implements OnInit {
     };
     let observable = this._httpService.getUser(this.user.username);
     observable.subscribe(data => {
-      if (!data) {
+      if (this.user.username.replace(/\s/g, '').length < 1 || !data) {
         this.errors["login"] = "Invalid Credentials";
         this.errors["status"] = "true";
       }
       else {
-        console.log()
+        let observable = this._httpService.loginUser(this.user);
+        observable.subscribe(data => {
+          if (data["status"]) {
+            this.errors["login"] = "Invalid Credentials";
+            this.errors["status"] = "true";
+          }
+          else {
+            console.log(data);
+          }
+        })
       }
     });
   }

@@ -7,7 +7,6 @@ const bcrypt = require('bcryptjs');
 class Users{
 
     all(req, res){
-        console.log("getting users");
         User.find({}, function(err, users){
             if(err){
                 res.json({'status': 500, 'errors': err});
@@ -28,7 +27,17 @@ class Users{
     }
 
     login(req, res) {
-        console.log(req.body);
+        User.findOne({username: req.body.username}, function(err, user){
+            bcrypt.compare(req.body.password, user.password)
+            .then(result => {
+                if (result) {
+                    res.json(user);
+                }
+                else {
+                    res.json({'status': 500, 'errors': err});
+                }
+            })
+        });
     }
 
     create(req, res){
