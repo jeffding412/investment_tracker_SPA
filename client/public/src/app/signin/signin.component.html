@@ -11,7 +11,8 @@
           <label>Password</label>
           <input type="password" class="form-control" name="user.password" [(ngModel)]="user.password">
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <p class="text-danger" *ngIf="errors.login">{{errors.login}}</p>
+        <button type="submit" class="btn btn-success">Login</button>
       </form>
     </div>
 
@@ -28,7 +29,7 @@
           <p class="text-danger" *ngIf="errors.password">{{errors.password}}</p>
           <input type="password" class="form-control" name="newUser.password" [(ngModel)]="newUser.password">
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="submit" class="btn btn-success">Register</button>
       </form>
     </div>
   </div>

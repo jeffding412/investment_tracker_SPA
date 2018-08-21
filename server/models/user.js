@@ -3,8 +3,8 @@ console.log('user.js works');
 const mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
-    email: String,
-    passwordHash: String,
+    username: String,
+    password: String,
     portfolioValue: Number,
     principleValue: Number,
     investments: Array

@@ -1,11 +1,12 @@
 console.log('routes.js works');
 
-const Tasks = require('./../controllers/users.js');
+const Users = require('./../controllers/users.js');
 
 module.exports = function(app){
-    // app.get('/task', Tasks.all);
-    // app.get('/task/:id', Tasks.findOne);
-    // app.post('/task', Tasks.create);
+    app.get('/users', Users.all);
+    app.get('/users/:username', Users.findOne);
+    app.post('/users/login', Users.login);
+    app.post('/users', Users.create);
     // app.put('/task/:id', Tasks.update);
-    // app.delete('/task/:id', Tasks.delete);
+    app.delete('/users/:id', Users.delete);
 }

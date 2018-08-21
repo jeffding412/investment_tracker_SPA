@@ -25,8 +25,6 @@ app.use(bodyParser.json());
 const flash = require('express-flash');
 app.use(flash());
 
-const bcrypt = require('bcryptjs');
-
 require('./server/config/mongoose.js')();
 // Routes
 require('./server/config/routes.js')(app)

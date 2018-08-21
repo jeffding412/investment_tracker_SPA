@@ -10,6 +10,8 @@ export class SigninComponent implements OnInit {
   newUser = {
     "username": "",
     "password": "",
+    "portfolioValue": 0,
+    "principleValue": 0
   }
 
   user = {
@@ -22,6 +24,22 @@ export class SigninComponent implements OnInit {
   constructor(private _httpService: HttpService){}
 
   ngOnInit() {
+  }
+
+  getUserByUsername(username) {
+    let observable = this._httpService.getUser(username);
+    observable.subscribe(data => {
+      if (data) {
+        this.errors["username"] = "Username already exists";
+        this.errors["status"] = "true";
+      }
+      else {
+        let observable = this._httpService.createUser(this.newUser);
+        observable.subscribe(data => {
+          console.log(data);
+        });
+      }
+    });
   }
 
   // validate forms
@@ -46,14 +64,29 @@ export class SigninComponent implements OnInit {
     }
   }
 
+  validateLogin() {
+    this.errors = {
+      "status": "false"
+    };
+    let observable = this._httpService.getUser(this.user.username);
+    observable.subscribe(data => {
+      if (!data) {
+        this.errors["login"] = "Invalid Credentials";
+        this.errors["status"] = "true";
+      }
+      else {
+        console.log()
+      }
+    });
+  }
+
   register() {
     if (this.validateRegistration()) {
-      console.log("gucci");
+      this.getUserByUsername(this.newUser.username)
     }
   }
 
   login() {
-    console.log(this.user);
+    this.validateLogin()
   }
-
 }
