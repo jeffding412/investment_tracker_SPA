@@ -26,6 +26,16 @@ class Users{
         });
     }
 
+    findOneByID(req, res){
+        User.findOne({_id: req.params.id}, function(err, user){
+            if(err){
+                res.json({'status': 500, 'errors': err});
+            }else{
+                res.json(user);
+            }
+        });
+    }
+
     login(req, res) {
         User.findOne({username: req.body.username}, function(err, user){
             bcrypt.compare(req.body.password, user.password)
@@ -54,15 +64,30 @@ class Users{
         })
     }
 
-    // update(req, res){
-    //     Task.update({_id: req.params.id}, req.body, function(err, task){
-    //         if(err){
-    //             res.json({'status': 500, 'errors': err});
-    //         }else{
-    //             res.json({'status': 200, 'tasks': task});
-    //         }
-    //     });
-    // }
+    update(req, res){
+        if (req.body.password) {
+            bcrypt.hash(req.body.password, 10)
+            .then(hashed_password => {
+                req.body.password = hashed_password;
+                User.update({_id: req.params.id}, req.body, function(err, user){
+                    if(err){
+                        res.json({'status': 500, 'errors': err});
+                    }else{
+                        res.json(user);
+                    }
+                });
+            })
+        }
+        else {
+            User.update({_id: req.params.id}, req.body, function(err, user){
+                if(err){
+                    res.json({'status': 500, 'errors': err});
+                }else{
+                    res.json(user);
+                }
+            });
+        }
+    }
 
     delete(req, res){
         User.remove({_id: req.params.id}, function(err){

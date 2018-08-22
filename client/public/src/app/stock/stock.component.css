@@ -1,0 +1,27 @@
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    background-color: black;
+}
+
+.container {
+    padding: 100px;
+    background-color: black;
+}
+
+a {
+    color: inherit;
+}
+
+a:hover {
+    color: #85bb65;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.jumbotron {
+    background-color: black;
+}

@@ -5,8 +5,9 @@ const Users = require('./../controllers/users.js');
 module.exports = function(app){
     app.get('/users', Users.all);
     app.get('/users/:username', Users.findOne);
+    app.get('/user/:id', Users.findOneByID);
     app.post('/users/login', Users.login);
     app.post('/users', Users.create);
-    // app.put('/task/:id', Tasks.update);
+    app.put('/users/:id', Users.update);
     app.delete('/users/:id', Users.delete);
 }

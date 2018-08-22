@@ -8,6 +8,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: ['./portfolio.component.css']
 })
 export class PortfolioComponent implements OnInit {
+  id;
 
   constructor(
     private _httpService: HttpService,
@@ -17,7 +18,7 @@ export class PortfolioComponent implements OnInit {
 
   ngOnInit() {
     this._route.params.subscribe((params: Params) => {
-        console.log(params['id'])
+        this.id = params['id'];
     });
   }
 

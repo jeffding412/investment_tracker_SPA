@@ -27,11 +27,12 @@ export class MainComponent implements OnInit {
   getStockBySymbol(ticker) {
     let observable = this._httpService.getStockBySymbol(ticker);
     observable.subscribe(data => {
-      var date = data["Meta Data"]["3. Last Refreshed"];
-      this.stocks[ticker]["price"] = parseFloat(data["Time Series (Daily)"][date]["5. adjusted close"]).toFixed(2);
-      var open = parseFloat(data["Time Series (Daily)"][date]["1. open"]);
-      this.stocks[ticker]["change"] = (this.stocks[ticker]["price"] - open).toFixed(2);
-      this.stocks[ticker]["percent"] = (100*(this.stocks[ticker]["change"])/open).toFixed(2);
+      console.log(parseFloat(data["Global Quote"]["05. price"]).toFixed(2));
+      // var date = data["Meta Data"]["3. Last Refreshed"];
+      this.stocks[ticker]["price"] = parseFloat(data["Global Quote"]["05. price"]).toFixed(2);
+      // var open = parseFloat(data["Time Series (Daily)"][date]["1. open"]);
+      this.stocks[ticker]["change"] = parseFloat(data["Global Quote"]["09. change"]).toFixed(2);
+      this.stocks[ticker]["percent"] = parseFloat(data["Global Quote"]["10. change percent"]).toFixed(2);
     });
   }
   

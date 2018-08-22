@@ -8,13 +8,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './main/main.component';
 import { SigninComponent } from './signin/signin.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
+import { SettingsComponent } from './settings/settings.component';
+import { StockComponent } from './stock/stock.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     SigninComponent,
-    PortfolioComponent
+    PortfolioComponent,
+    SettingsComponent,
+    StockComponent
   ],
   imports: [
     BrowserModule,

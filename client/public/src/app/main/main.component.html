@@ -14,7 +14,7 @@
       <p class="col-md">DOW J</p>
       <p class="col-md">{{stocks["DJIA"]["price"]}}</p>
       <p *ngIf="stocks['DJIA']['change'] >= 0" class="col-md text-success">+{{stocks["DJIA"]["change"]}} (+{{stocks["DJIA"]["percent"]}}%)</p>
-      <p *ngIf="0 > stocks['DJIA']['change']" class="col-md text-danger">-{{stocks["DJIA"]["change"]}} (-{{stocks["DJIA"]["percent"]}}%)</p>
+      <p *ngIf="0 > stocks['DJIA']['change']" class="col-md text-danger">{{stocks["DJIA"]["change"]}} ({{stocks["DJIA"]["percent"]}}%)</p>
     </div>
 
     <div class="row">

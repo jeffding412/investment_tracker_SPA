@@ -15,6 +15,10 @@ export class HttpService {
     return this._http.get(`/users/${username}`);
   }
 
+  getUserByID(id) {
+    return this._http.get(`/user/${id}`);
+  }
+
   loginUser(user) {
     return this._http.post('/users/login', user);
   }
@@ -23,7 +27,15 @@ export class HttpService {
     return this._http.post('/users', newUser);
   }
 
+  updateUser(id, user){
+    return this._http.put(`/users/${id}`, user);
+  }
+
   getStockBySymbol(ticker) {
+    return this._http.get(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=Z33FIUU3K8QXGKSD`);
+  }
+
+  getStock(ticker) {
     return this._http.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}&apikey=Z33FIUU3K8QXGKSD`);
   }
 }

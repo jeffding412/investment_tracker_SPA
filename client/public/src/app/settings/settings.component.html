@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <form class="form-inline mr-auto mt-2 mt-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+        Dropdown
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" [routerLink]="['/portfolio', id]">Portfolio</a>
+        <a class="dropdown-item" [routerLink]="['/settings', id]">Settings</a>
+        <a class="dropdown-item" [routerLink]="['/']">Logout</a>
+      </div>
+    </li>
+  </ul>
+</nav>
+<div class="container text-white">
+  <div class="text-center">
+    <h1>Update Info</h1>
+    <div class="row text-left">
+      <div class="col-lg"> 
+        <h2>Update Username</h2>
+        <form (submit)="changeUsername()">
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" name="user.username" [(ngModel)]="user.username">
+          </div>
+          <p class="text-danger" *ngIf="errors.username">{{errors.username}}</p>
+          <button type="submit" class="btn btn-success">Update</button>
+        </form>
+      </div>
+      <div class="col-lg"> 
+        <h2>Change Password</h2>
+        <form (submit)="changePassword()">
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" name="change.password" [(ngModel)]="change.password">
+            <p class="text-danger" *ngIf="errors.password">{{errors.password}}</p>
+          </div>
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" class="form-control" name="change.confirm" [(ngModel)]="change.confirm">
+            <p class="text-danger" *ngIf="errors.confirm">{{errors.confirm}}</p>
+          </div>
+          <button type="submit" class="btn btn-success">Update</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
