@@ -25,19 +25,50 @@
       <h3>{{stock["price"]}}</h3>
       <h6 *ngIf="stock['change'] >= 0" class="col-md text-success">+{{stock["change"]}} (+{{stock["percent"]}}%)</h6>
       <h6 *ngIf="0 > stock['change']" class="col-md text-danger">{{stock["change"]}} ({{stock["percent"]}}%)</h6>
-      <div class="row">
+      <div class="row" *ngIf="owns">
         <div class="col">
-          <h4>This is some text within a card body.</h4>
+          <p>Your Equity</p>
+          <h4>${{user["equity"]}}</h4>
+          <div class="row">
+            <div class="col">
+              <p>Cost</p>
+              <p>Return</p>
+            </div>
+            <div class="col text-right">
+              <p>${{user['principal']}}</p>
+              <p *ngIf="0 > user['return']" class="text-danger">{{user['return']}} {{user['returnPercent']}}%</p>
+              <p *ngIf="user['return'] >= 0" class="text-success">{{user['return']}} {{user['returnPercent']}}%</p>
+            </div>
+          </div>
         </div>
         <div class="col">
-          <h4>This is some text within a card body.</h4>
+          <p>Your Average Cost</p>
+          <h4>${{user["averageCost"]}}</h4>
+          <div class="row">
+            <div class="col">
+              <p>Shares</p>
+            </div>
+            <div class="col text-right">
+              <p>{{user['shares']}}</p>
+            </div>
+          </div>
         </div>
+      </div>
+      <div *ngIf="info">
+        <h1>Info about {{info['Global Quote']['01. symbol']}}</h1>
+        <p>Today's Open: {{info['Global Quote']['02. open']}}</p>
+        <p>Today's High: {{info['Global Quote']['03. high']}}</p>
+        <p>Today's Low: {{info['Global Quote']['04. low']}}</p>
+        <p>Volume: {{info['Global Quote']['06. volume']}}</p>
+        <p>Previous Close: {{info['Global Quote']['08. previous close']}}</p>
+        <p>Today's Change: <span *ngIf="0 > info['Global Quote']['09. change']" class="text-danger">{{info['Global Quote']['09. change']}}</span><span *ngIf="info['Global Quote']['09. change'] >= 0" class="text-success">{{info['Global Quote']['09. change']}}</span></p>
+        <p>Today's Change Percent: <span *ngIf="0 > info['Global Quote']['09. change']" class="text-danger">{{info['Global Quote']['10. change percent']}}</span><span *ngIf="info['Global Quote']['09. change'] >= 0" class="text-success">{{info['Global Quote']['10. change percent']}}</span></p>
       </div>
     </div>
     <div class="col-lg-4 jumbotron">
       <div class="row">
         <button class="col btn-dark" (click)="marketBuy()">Buy {{stock["name"]}}</button>
-        <button class="col btn-dark" (click)="marketSell()">Sell {{stock["name"]}}</button>
+        <button class="col btn-dark" *ngIf="owns" (click)="marketSell()">Sell {{stock["name"]}}</button>
       </div>
       <hr>
       <form (submit)="order()">

@@ -35,6 +35,10 @@ export class HttpService {
     return this._http.put(`/users/${id}/buy`, order);
   }
 
+  sellStock(id, order) {
+    return this._http.put(`/users/${id}/sell`, order);
+  }
+
   getStockBySymbol(ticker) {
     return this._http.get(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=Z33FIUU3K8QXGKSD`);
   }

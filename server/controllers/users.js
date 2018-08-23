@@ -114,6 +114,41 @@ class Users{
         })
     }
 
+    sellInvestment(req, res) {
+        User.findOne({_id: req.params.id}, function(err, user){
+            var sold = false;
+            if(err){
+                res.json({'status': 500, 'errors': err});
+            }else{
+                for (var i = 0; i < user["investments"].length; i++) {
+                    if (user["investments"][i]["symbol"] == req.body.symbol) {
+                        req.body.shares = user["investments"][i]["shares"]-req.body.shares;
+                        req.body.principal = ((parseFloat(user["investments"][i]["principal"]))*(req.body.shares/user["investments"][i]["shares"])).toFixed(2);
+                        user["investments"].splice(i, 1);
+                        sold = true; 
+                    }
+                }
+                user.save(function(err) {
+                    if (sold && req.body.shares > 0) {
+                        User.update({_id: req.params.id}, {$push: {investments: req.body}}, function(err, user){
+                            if(err){
+                                res.json({'status': 500, 'errors': err});
+                            }else{
+                                res.json(user);
+                            }               
+                        })
+                    }
+                    else if (req.body.shares == 0) {
+                        res.json({'status': 200});
+                    }
+                    else {
+                        res.json({'status': 500, 'errors': err});
+                    }
+                })  
+            }               
+        })
+    }
+
     delete(req, res){
         User.remove({_id: req.params.id}, function(err){
             if(err){
