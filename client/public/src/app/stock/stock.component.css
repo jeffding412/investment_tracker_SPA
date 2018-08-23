@@ -25,3 +25,7 @@ a:hover {
 .jumbotron {
     background-color: black;
 }
+
+.btn-dark {
+    background-color: black;
+}

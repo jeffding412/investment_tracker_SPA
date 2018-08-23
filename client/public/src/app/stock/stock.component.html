@@ -36,18 +36,33 @@
     </div>
     <div class="col-lg-4 jumbotron">
       <div class="row">
-        <a class="col">Buy {{stock["name"]}}</a>
-        <a class="col">Sell {{stock["name"]}}</a>
+        <button class="col btn-dark" (click)="marketBuy()">Buy {{stock["name"]}}</button>
+        <button class="col btn-dark" (click)="marketSell()">Sell {{stock["name"]}}</button>
       </div>
       <hr>
-      <form>
+      <form (submit)="order()">
         <div class="form-group row">
           <label class="col col-form-label">Shares</label>
           <div class="col">
-            <input type="text" class="form-control">
+            <input type="number" class="form-control text-right" name="shares" [(ngModel)]="shares">
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="form-group row">
+          <label class="col">Price</label>
+          <div class="col">
+            <p class="text-right">{{stock["price"]}}</p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col" *ngIf="buy">Cost</label>
+          <label class="col" *ngIf="!buy">Credit</label>
+          <div class="col">
+            <p class="text-right" *ngIf="(stock['price'] * shares).toFixed(2) >= 0">{{(stock["price"] * shares).toFixed(2)}}</p>
+          </div>
+        </div>
+        <p class="text-danger" *ngIf="errors.shares">{{errors.shares}}</p>
+        <button type="submit" class="btn btn-success" *ngIf="buy">Buy</button>
+        <button type="submit" class="btn btn-danger" *ngIf="!buy">Sell</button>
       </form>
     </div>
   </div>

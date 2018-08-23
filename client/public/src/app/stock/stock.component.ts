@@ -14,6 +14,14 @@ export class StockComponent implements OnInit {
   stock = {
 
   }
+  shares = 0;
+  buy = true;
+  errors = {
+
+  }
+  investment = {
+    
+  }
   constructor(
     private _httpService: HttpService,
     private _route: ActivatedRoute,
@@ -36,5 +44,47 @@ export class StockComponent implements OnInit {
       this.stock["change"] = parseFloat(data["Global Quote"]["09. change"]).toFixed(2);
       this.stock["percent"] = parseFloat(data["Global Quote"]["10. change percent"]).toFixed(2);
     });
+  }
+
+  marketBuy() {
+    this.buy = true;
+  }
+
+  marketSell() {
+    this.buy = false;
+  }
+
+  order() {
+    this.errors = {}
+    if (!(Number.isInteger(this.shares) && this.shares > 0)) {
+      this.errors["shares"] = "Shares must be a positive integer";
+    }
+    else {
+      if (this.buy) {
+        let observable = this._httpService.getStockBySymbol(this.ticker);
+        observable.subscribe(data => {
+          this.investment["symbol"] = this.ticker;
+          this.investment["shares"] = this.shares;
+          this.investment["principal"] = (parseFloat(data["Global Quote"]["05. price"]) * this.shares).toFixed(2);
+          let observable = this._httpService.buyStock(this.id, this.investment);
+          observable.subscribe(data => {
+            console.log(data);
+          })
+        });
+      }
+      else {
+        let observable = this._httpService.getStockBySymbol(this.ticker);
+        observable.subscribe(data => {
+          console.log(data);
+          // this.investment["symbol"] = this.ticker;
+          // this.investment["shares"] = this.shares;
+          // this.investment["principal"] = (parseFloat(data["Global Quote"]["05. price"]) * this.shares).toFixed(2);
+          // let observable = this._httpService.buyStock(this.id, this.investment);
+          // observable.subscribe(data => {
+          //   console.log(data);
+          // })
+        });
+      }
+    }
   }
 }

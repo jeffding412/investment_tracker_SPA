@@ -89,6 +89,31 @@ class Users{
         }
     }
 
+    buyInvestment(req,res) {
+        User.findOne({_id: req.params.id}, function(err, user){
+            if(err){
+                res.json({'status': 500, 'errors': err});
+            }else{
+                for (var i = 0; i < user["investments"].length; i++) {
+                    if (user["investments"][i]["symbol"] == req.body.symbol) {
+                        req.body.shares += user["investments"][i]["shares"];
+                        req.body.principal = (parseFloat(user["investments"][i]["principal"]) + parseFloat(req.body.principal)).toFixed(2);
+                        user["investments"].splice(i, 1);      
+                    }
+                }
+                user.save(function(err) {
+                    User.update({_id: req.params.id}, {$push: {investments: req.body}}, function(err, user){
+                        if(err){
+                            res.json({'status': 500, 'errors': err});
+                        }else{
+                            res.json(user);
+                        }               
+                    })
+                })  
+            }               
+        })
+    }
+
     delete(req, res){
         User.remove({_id: req.params.id}, function(err){
             if(err){
