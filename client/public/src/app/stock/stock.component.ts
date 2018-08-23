@@ -23,21 +23,8 @@ export class StockComponent implements OnInit {
     
   }
   user;
+  info;
   owns = false;
-  info = {
-    "Global Quote": {
-      "01. symbol": "",
-      "02. open": "",
-      "03. high": "",
-      "04. low": "",
-      "05. price": "",
-      "06. volume": "",
-      "07. latest trading day": "",
-      "08. previous close": "",
-      "09. change": "",
-      "10. change percent": ""
-    }
-  }
   constructor(
     private _httpService: HttpService,
     private _route: ActivatedRoute,
@@ -72,12 +59,12 @@ export class StockComponent implements OnInit {
   getStock(ticker) {
     let observable = this._httpService.getStockBySymbol(ticker);
     observable.subscribe(data => {
+      this.info = data;
       this.stock["name"] = data["Global Quote"]["01. symbol"];
       this.stock["price"] = parseFloat(data["Global Quote"]["05. price"]).toFixed(2);
       this.stock["change"] = parseFloat(data["Global Quote"]["09. change"]).toFixed(2);
       this.stock["percent"] = parseFloat(data["Global Quote"]["10. change percent"]).toFixed(2);
       this.getUser();
-      this.info = data;
       console.log(this.info)
     });
   }

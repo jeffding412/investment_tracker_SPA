@@ -9,7 +9,9 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class PortfolioComponent implements OnInit {
   id;
+  user = {
 
+  }
   constructor(
     private _httpService: HttpService,
     private _route: ActivatedRoute,
@@ -19,7 +21,15 @@ export class PortfolioComponent implements OnInit {
   ngOnInit() {
     this._route.params.subscribe((params: Params) => {
         this.id = params['id'];
+        this.getUser();
     });
   }
 
+  getUser() {
+    let observable = this._httpService.getUserByID(this.id);
+    observable.subscribe(data => {
+      this.user = data;
+      console.log(this.user);
+    });
+  }
 }
